@@ -14,7 +14,7 @@ pacman -S xorg-server xorg-xrandr mesa nvidia nvidia-utils nvidia-settings nvidi
 systemctl enable sddm
 
 # install audio
-pacman -S pulseaudio pulseaudio-alsa --noconfirm --needed
+pacman -S pulseaudio pulseaudio-alsa alsa-utils --noconfirm --needed
 
 # install bluetooth
 pacman -S bluez bluez-utils pulseaudio-bluetooth --noconfirm --needed
