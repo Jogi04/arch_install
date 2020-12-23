@@ -8,11 +8,9 @@ makepkg -si
 
 declare -a programs=(
 
-# development utils
   "visual-studio-code-bin"
   "android-studio"
-  "virtualbox-ext-oracle"
-  
+  "spotify"
 )
 
 for i in "${programs[@]}"
