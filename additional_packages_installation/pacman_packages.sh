@@ -43,7 +43,11 @@ declare -a programs=(
 
 # system utils
   "tlp"
-  
+
+# requirements for plasma customizaiton saver
+  "scrot"
+  "kdialog"
+  "qt5-quickcontrols"
 )
 
 for i in "${programs[@]}"
