@@ -25,6 +25,7 @@ declare -a programs=(
 # development utils
   "python"
   "python-pip"
+  "python-pyaudio"
   "pycharm-community-edition"
   "virtualbox"
   "wireshark-qt"
