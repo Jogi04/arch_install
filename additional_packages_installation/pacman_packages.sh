@@ -26,6 +26,7 @@ declare -a programs=(
   "python"
   "python-pip"
   "python-pyaudio"
+  "espeak"
   "pycharm-community-edition"
   "virtualbox"
   "wireshark-qt"
