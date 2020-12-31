@@ -8,6 +8,11 @@ passwd jogi
 sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/g" /etc/sudoers
 pacman -S xdg-user-dirs --noconfirm --needed
 xdg-user-dirs-update
+rm /home/jogi/Public
+rm /home/jogi/Templates
+rm /home/jogi/Documents
+rm /home/jogi/Music
+rm /home/jogi/Videos
 
 # install graphical utils
 pacman -S xorg-server xorg-xrandr mesa nvidia nvidia-utils nvidia-settings nvidia-lts nvidia-prime sddm sddm-kcm --noconfirm --needed
