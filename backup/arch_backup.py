@@ -2,12 +2,14 @@ import os
 import subprocess
 import datetime
 
+import configparser
+
 
 class Arch_Backup:
-    def __init__(self, base_command, include, exclude, source, destination, disk, mount_directory):
+    def __init__(self, base_command, include_list, exclude_list, source, destination, disk, mount_directory):
         self.base_command = base_command
-        self.include = include
-        self.exclude = exclude
+        self.include_list = include_list
+        self.exclude_list = exclude_list
         self.source = source
         self.destination = destination
         self.disk = disk
@@ -20,18 +22,13 @@ class Arch_Backup:
 
     def backup(self):
         full_command = self.base_command
-        for include_option in self.include:
-            full_command.append("--include='" + include_option)
-        for exclude_option in self.exclude:
-            full_command.append(" --exclude='" + exclude_option)
-        full_command.append(self.source)
-        full_command.append(self.destination)
-        full_command_string = self.list_to_string(full_command)
-        os.system(full_command_string)
-
-    def list_to_string(self, lst):
-        str1 = ' '
-        return str1.join(lst)
+        for include in self.include_list:
+            full_command += " " + "--include='" + str(include + "'")
+        for exclude in self.exclude_list:
+            full_command += " " + "--exclude='" + str(exclude) + "'"
+        full_command += ' ' + str(self.source) + ' ' + str(self.destination)
+        print(full_command)
+        os.system(full_command)
 
     def mount_backup_destination(self):
         subprocess.run(['sudo', '-S', 'mount', str(self.disk), str(self.mount_directory)])
@@ -47,15 +44,17 @@ class Arch_Backup:
         print('Backup took ' + str(runtime))
 
 
-base_cmd = ['rsync', '-av', '--delete', '--stats']
-include_list = [".bashrc'", ".config'", ".ssh'", ".kde4'", ".local'"]
-exclude_list = ["/.*'", "Downloads'", "Android'", "Arduino'", "VMs'"]
-backup_source = '/home/jogi/'
-backup_destination = '/mnt/USB_backup/backup/'
-destination_disk = '/dev/sda'
-mount_dir = '/mnt/USB_backup/'
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+base_cmd = 'rsync -av --delete --stats'
+incl_lst = config['options']['include_list'].split(' ')
+excl_lst = config['options']['exclude_list'].split(' ')
+backup_source = config['paths']['backup_source']
+backup_destination = config['paths']['backup_destination']
+destination_disk = config['paths']['destination_disk']
+mount_dir = config['paths']['mount_dir']
 
 
 if __name__ == '__main__':
-    backup = Arch_Backup(base_cmd, include_list, exclude_list, backup_source, backup_destination, destination_disk,
-                         mount_dir)
+    backup = Arch_Backup(base_cmd, incl_lst, excl_lst, backup_source, backup_destination, destination_disk, mount_dir)
