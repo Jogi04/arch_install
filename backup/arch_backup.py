@@ -25,6 +25,7 @@ class Arch_Backup:
         main function to backup specified directories, uses base_cmd string and appends the include/exclude options to
         the string
         """
+        
         full_command = self.base_command
         for include in self.include_list:
             full_command += " " + "--include='" + str(include + "'")
@@ -38,6 +39,7 @@ class Arch_Backup:
         """
         first the luks encrypted drive will be opened and mounted afterwards at the specified mountpoint
         """
+        
         subprocess.run(['sudo', '-S', 'cryptsetup', 'open', '/dev/sda4', 'backup'])
         subprocess.run(['sudo', '-S', 'mount', str(self.disk), str(self.mount_directory)])
         print('Drive successfully mounted')
@@ -46,6 +48,7 @@ class Arch_Backup:
         """
         first the drive will be unmounted from the specified mount directory and afterwards closed using cryptsetup
         """
+        
         subprocess.run(['sudo', '-S', 'umount', str(self.mount_directory)])
         subprocess.run(['sudo', '-S', 'cryptsetup', 'close', 'backup'])
         print('Drive successfully unmounted')
@@ -54,6 +57,7 @@ class Arch_Backup:
         """
         this function how long the backup took
         """
+        
         end_time = datetime.datetime.now()
         runtime = end_time - self.start_time
         print('Backup took ' + str(runtime))
