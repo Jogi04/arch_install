@@ -1,2 +1,2 @@
 # arch_install
-a script that automatically installs and configures Arch Linux
+a script to automatically install, configure and maintain Arch Linux
