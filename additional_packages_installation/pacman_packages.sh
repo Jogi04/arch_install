@@ -50,6 +50,7 @@ declare -a programs=(
   "kinfocenter"
   "keepassxc"
   "vlc"
+  "filelight"
 
 # system utils
   "tlp"
@@ -70,6 +71,8 @@ usermod -aG lock jogi
 usermod -aG libvirt jogi
 systemctl enable libvirtd
 systemctl enable tlp
-pip install pyserial        # python import for arduino
+
+# python import for arduino
+pip install pyserial
 
 reboot
