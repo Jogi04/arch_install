@@ -50,6 +50,9 @@ declare -a programs=(
   "scrot"
   "kdialog"
   "qt5-quickcontrols"
+  
+# requirements for ventoy
+  "exfat-utils"
 )
 
 for i in "${programs[@]}"
