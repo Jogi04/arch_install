@@ -50,7 +50,6 @@ declare -a programs=(
   "kinfocenter"
   "keepassxc"
   "vlc"
-  "filelight"
 
 # system utils
   "tlp"
@@ -68,6 +67,9 @@ done
 usermod -aG wireshark jogi
 usermod -aG uucp jogi
 usermod -aG lock jogi
+usermod -aG libvirt jogi
+systemctl enable libvirtd
+systemctl enable tlp
 pip install pyserial        # python import for arduino
 
 reboot
