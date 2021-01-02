@@ -31,11 +31,13 @@ class Arch_Backup:
         os.system(full_command)
 
     def mount_backup_destination(self):
+        subprocess.run(['sudo', '-S', 'cryptsetup', 'open', '/dev/sda4', 'backup'])
         subprocess.run(['sudo', '-S', 'mount', str(self.disk), str(self.mount_directory)])
         print('Drive successfully mounted')
 
     def umount_backup_destination(self):
         subprocess.run(['sudo', '-S', 'umount', str(self.mount_directory)])
+        subprocess.run(['sudo', '-S', 'cryptsetup', 'close', 'backup'])
         print('Drive successfully unmounted')
 
     def print_runtime(self):
@@ -48,8 +50,8 @@ config = configparser.ConfigParser()
 config.read('config.ini')
 
 base_cmd = 'rsync -av --delete --stats'
-incl_lst = config['options']['include_list'].split(' ')
 excl_lst = config['options']['exclude_list'].split(' ')
+incl_lst = config['options']['include_list'].split(' ')
 backup_source = config['paths']['backup_source']
 backup_destination = config['paths']['backup_destination']
 destination_disk = config['paths']['destination_disk']
