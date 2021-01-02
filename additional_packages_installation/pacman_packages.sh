@@ -28,11 +28,20 @@ declare -a programs=(
   "python-pyaudio"
   "espeak"
   "pycharm-community-edition"
-  "virtualbox"
   "wireshark-qt"
   "gparted"
   "arduino"
   "arduino-avr-core"
+
+# packages for kvm/qemu virtualization
+  "virt-manager"
+  "qemu"
+  "ovmf"
+  "vde2"
+  "ebtales"
+  "dnsmasq"
+  "bridge-utils"
+  "openbsd-netcat"
 
 # desktop utils
   "spectacle"
@@ -45,11 +54,6 @@ declare -a programs=(
 
 # system utils
   "tlp"
-
-# requirements for plasma customizaiton saver
-  "scrot"
-  "kdialog"
-  "qt5-quickcontrols"
   
 # requirements for ventoy
   "exfat-utils"
