@@ -38,7 +38,7 @@ declare -a programs=(
   "qemu"
   "ovmf"
   "vde2"
-  "ebtales"
+  "ebtables"
   "dnsmasq"
   "bridge-utils"
   "openbsd-netcat"
