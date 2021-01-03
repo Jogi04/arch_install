@@ -33,15 +33,6 @@ declare -a programs=(
   "arduino"
   "arduino-avr-core"
 
-# packages for kvm/qemu virtualization
-  "virt-manager"
-  "qemu"
-  "ovmf"
-  "vde2"
-  "ebtables"
-  "dnsmasq"
-  "openbsd-netcat"
-
 # desktop utils
   "spectacle"
   "kate"
@@ -67,8 +58,6 @@ done
 usermod -aG wireshark jogi
 usermod -aG uucp jogi
 usermod -aG lock jogi
-usermod -aG libvirt jogi
-systemctl enable libvirtd
 systemctl enable tlp
 
 # python import for arduino
