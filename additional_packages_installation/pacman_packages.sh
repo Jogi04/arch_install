@@ -20,6 +20,7 @@ declare -a programs=(
   "man-db"
   "ethtool"
   "htop"
+  "tldr"
 
 
 # development utils
