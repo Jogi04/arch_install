@@ -64,7 +64,7 @@ timedatectl set-ntp true
 timedatectl status
 
 # set language
-nano /etc/locale.gen | sed -e "s/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8"
+nano /etc/locale.gen | sed -e "s/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g"
 echo LANG=en_US.UTF-8 > /etc/locale.conf
 locale-gen
 
