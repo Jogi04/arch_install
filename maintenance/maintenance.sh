@@ -8,6 +8,7 @@ sudo reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 # update system
 sudo pacman -Syu
 yay -Syu
+upgrade_oh_my_zsh
 
 # clean cached pacman and AUR files
 sudo pacman -S pacman-contrib --noconfirm --needed
