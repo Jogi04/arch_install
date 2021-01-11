@@ -55,7 +55,7 @@ class Arch_Backup:
 
     def print_runtime(self):
         """
-        this function how long the backup took
+        prints how long the backup took
         """
         
         end_time = datetime.datetime.now()
