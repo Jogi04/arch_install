@@ -21,6 +21,7 @@ declare -a programs=(
   "ethtool"
   "htop"
   "tldr"
+  "zsh"
 
 
 # development utils
