@@ -22,6 +22,7 @@ declare -a programs=(
   "htop"
   "tldr"
   "zsh"
+  "autofs"
 
 
 # development utils
@@ -61,6 +62,7 @@ usermod -aG wireshark jogi
 usermod -aG uucp jogi
 usermod -aG lock jogi
 systemctl enable tlp
+systemctl enable autofs
 
 # python import for arduino
 pip install pyserial
