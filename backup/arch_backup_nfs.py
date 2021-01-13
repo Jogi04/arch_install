@@ -30,6 +30,9 @@ class Arch_Backup:
             full_command += " " + "--exclude='" + str(exclude) + "'"
         full_command += ' ' + str(self.source) + ' ' + str(self.destination)
         print(full_command)
+        # trigger autofs to mount remote nfs share
+        os.system('ls ' + self.destination)
+        # real backup command
         os.system(full_command)
 
     def print_runtime(self):
