@@ -1,21 +1,26 @@
 #!/bin/python
 
 import os
+import sys
 import datetime
 
 import configparser
 
 
 class Arch_Backup:
-    def __init__(self, base_command, include_list, exclude_list, source, destination):
+    def __init__(self, base_command, include_list, exclude_list, source, destination, server):
         self.base_command = base_command
         self.include_list = include_list
         self.exclude_list = exclude_list
         self.source = source
         self.destination = destination
-        self.start_time = datetime.datetime.now()
-        self.backup()
-        self.print_runtime()
+        self.server = server
+        if self.remote_host_up():
+            self.start_time = datetime.datetime.now()
+            self.backup()
+            self.print_runtime()
+        else:
+            sys.exit()
 
     def backup(self):
         """
@@ -30,10 +35,17 @@ class Arch_Backup:
             full_command += " " + "--exclude='" + str(exclude) + "'"
         full_command += ' ' + str(self.source) + ' ' + str(self.destination)
         print(full_command)
-        # trigger autofs to mount remote nfs share
-        os.system('ls ' + self.destination)
-        # real backup command
         os.system(full_command)
+
+    def remote_host_up(self):
+        """
+        verify that remote host is up
+        """
+
+        if os.system('ping -c 3 ' + self.server) is 0:
+            return True
+        else:
+            return False
 
     def print_runtime(self):
         """
@@ -47,13 +59,14 @@ class Arch_Backup:
 
 # load personal information from config file, named config_nfs.ini
 config = configparser.ConfigParser()
-config.read('config_nfs.ini')
+config.read('/home/jogi/programming/python/fun_projects/config_nfs.ini')
 base_cmd = 'rsync -av --delete --stats'
 excl_lst = config['options']['exclude_list'].split(' ')
 incl_lst = config['options']['include_list'].split(' ')
 backup_source = config['paths']['backup_source']
 backup_destination = config['paths']['backup_destination']
+nfs_server = config['paths']['nfs_server']
 
 
 if __name__ == '__main__':
-    backup = Arch_Backup(base_cmd, incl_lst, excl_lst, backup_source, backup_destination)
+    backup = Arch_Backup(base_cmd, incl_lst, excl_lst, backup_source, backup_destination, nfs_server)
