@@ -67,4 +67,7 @@ systemctl enable autofs
 # python import for arduino
 pip install pyserial
 
+# download firefox webdriver (geckodriver) for webscraping with selenium and python and install it in /usr/local/bin
+wget "https://github.com/mozilla/geckodriver/releases/download/v0.29.0/geckodriver-v0.29.0-linux64.tar.gz" -P /usr/local/bin
+
 reboot
