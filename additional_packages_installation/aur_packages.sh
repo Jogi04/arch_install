@@ -8,8 +8,6 @@ makepkg -si
 
 declare -a programs=(
 
-  "visual-studio-code-bin"
-  "android-studio"
   "spotify"
 )
 
