@@ -30,6 +30,7 @@ declare -a programs=(
   "python-pip"
   "python-pyaudio"
   "espeak"
+  "scapy"
   "pycharm-community-edition"
   "wireshark-qt"
   "gparted"
