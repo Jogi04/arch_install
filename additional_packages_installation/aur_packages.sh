@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# yay installation
-cd /opt
-sudo git clone https://aur.archlinux.org/yay.git
-cd /opt/yay
-makepkg -si
 
 declare -a programs=(
 
@@ -13,7 +8,9 @@ declare -a programs=(
 
 for i in "${programs[@]}"
 do
-  yay -S "$i" --noconfirm --needed
+  sudo mkdir /opt/"$i"
+  sudo chown jogi:jogi /opt/"$i"
+  git clone https://aur.archlinux.org/"$i".git
+  cd /opt/"$i"
+  makepkg -si
 done
-
-reboot
