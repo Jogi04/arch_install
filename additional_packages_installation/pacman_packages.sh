@@ -36,6 +36,7 @@ declare -a programs=(
   "gparted"
   "arduino"
   "arduino-avr-core"
+  "kdevelop"
 
 # desktop utils
   "spectacle"
