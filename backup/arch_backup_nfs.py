@@ -1,10 +1,10 @@
 #!/bin/python
 
 import os
-import sys
+import time
 import datetime
-
 import configparser
+from WoL import WoL
 
 
 class Arch_Backup:
@@ -15,12 +15,14 @@ class Arch_Backup:
         self.source = source
         self.destination = destination
         self.server = server
-        if self.remote_host_up():
-            self.start_time = datetime.datetime.now()
-            self.backup()
-            self.print_runtime()
-        else:
-            sys.exit()
+        if not self.remote_host_up():
+            # wake remote server and wait for 2 minutes while server is booting
+            WoL()
+            time.sleep(120)
+        self.start_time = datetime.datetime.now()
+        self.backup()
+        self.print_runtime()
+        self.shutdown_remote_server()
 
     def backup(self):
         """
@@ -56,6 +58,9 @@ class Arch_Backup:
         runtime = end_time - self.start_time
         print('Backup took ' + str(runtime))
 
+    def shutdown_remote_server(self):
+        os.system(f'ssh root@{self.server} "poweroff"')
+
 
 # load personal information from config file, named config_nfs.ini
 config = configparser.ConfigParser()
@@ -70,3 +75,4 @@ nfs_server = config['paths']['nfs_server']
 
 if __name__ == '__main__':
     backup = Arch_Backup(base_cmd, incl_lst, excl_lst, backup_source, backup_destination, nfs_server)
+
