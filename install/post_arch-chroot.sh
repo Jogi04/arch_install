@@ -70,6 +70,10 @@ locale-gen
 
 # enable kernel level shortcuts
 sed -e "s/kernel.sysrq = 16/kernel.sysrq = 1/g" /usr/lib/sysctl.d/50-default.conf
+
+# generate ssh keys
+ssh-keygen
+
 clear
 
 
