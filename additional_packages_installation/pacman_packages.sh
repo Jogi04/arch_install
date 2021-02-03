@@ -37,6 +37,7 @@ declare -a programs=(
   "arduino"
   "arduino-avr-core"
   "kdevelop"
+  "virtualbox"
 
 # desktop utils
   "spectacle"
@@ -63,6 +64,7 @@ done
 usermod -aG wireshark jogi
 usermod -aG uucp jogi
 usermod -aG lock jogi
+usermod -aG vboxusers jogi
 systemctl enable tlp
 systemctl enable autofs
 
