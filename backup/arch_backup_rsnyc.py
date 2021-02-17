@@ -61,7 +61,7 @@ class ArchBackupRsync:
         cprint('Backup took ' + str(runtime), 'green')
 
     def shutdown_remote_server(self):
-        os.system(f'ssh root@{self.server} "poweroff"')
+        os.system(f'ssh {self.username}@{self.server} "poweroff"')
 
 
 # load personal information from config file, named config_rsync.ini
