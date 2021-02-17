@@ -24,7 +24,7 @@ class ArchBackupRsync:
         self.start_time = datetime.datetime.now()
         self.backup()
         self.print_runtime()
-        # self.shutdown_remote_server()
+        self.shutdown_remote_server()
 
     def backup(self):
         """
