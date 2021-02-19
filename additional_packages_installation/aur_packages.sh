@@ -4,6 +4,8 @@
 declare -a programs=(
 
   "spotify"
+  "android-studio"
+  "downgrade"
 )
 
 for i in "${programs[@]}"
