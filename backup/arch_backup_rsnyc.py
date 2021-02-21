@@ -1,6 +1,7 @@
 #!/bin/python
 
 import os
+import sys
 import time
 import datetime
 import configparser
@@ -9,7 +10,7 @@ from WoL import WoL
 
 
 class ArchBackupRsync:
-    def __init__(self, base_command, include_list, exclude_list, source, destination, username, server):
+    def __init__(self, base_command, include_list, exclude_list, source, destination, username, server, shutdown_bool):
         self.base_command = base_command
         self.include_list = include_list
         self.exclude_list = exclude_list
@@ -17,6 +18,7 @@ class ArchBackupRsync:
         self.destination = destination
         self.username = username
         self.server = server
+        self.shutdown_bool = shutdown_bool
         if not self.remote_host_up():
             # wake remote server and wait for 2 minutes while server is booting
             WoL()
@@ -24,7 +26,8 @@ class ArchBackupRsync:
         self.start_time = datetime.datetime.now()
         self.backup()
         self.print_runtime()
-        self.shutdown_remote_server()
+        if shutdown_bool == 'true':
+            self.shutdown_remote_server()
 
     def backup(self):
         """
@@ -76,4 +79,14 @@ rsync_server = config['paths']['nfs_server']
 ssh_username = config['paths']['username']
 
 if __name__ == '__main__':
-    backup = ArchBackupRsync(base_cmd, incl_lst, excl_lst, backup_source, backup_destination, ssh_username, rsync_server)
+    # if specified via terminal whether server should shutdown after completed backup
+    if len(sys.argv) == 2:
+        backup = ArchBackupRsync(base_cmd, incl_lst, excl_lst, backup_source, backup_destination, ssh_username,
+                                 rsync_server, sys.argv[1].lower())
+    # if not specified default to shutdown = true
+    elif len(sys.argv) == 1:
+        backup = ArchBackupRsync(base_cmd, incl_lst, excl_lst, backup_source, backup_destination, ssh_username,
+                                 rsync_server, 'true')
+    # if more than one argument given raise error
+    else:
+        raise NameError('too many arguments given!')
