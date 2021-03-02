@@ -18,6 +18,9 @@ rm /home/jogi/Videos
 pacman -S xorg-server xorg-xrandr mesa nvidia nvidia-utils nvidia-settings nvidia-lts nvidia-prime sddm sddm-kcm --noconfirm --needed
 systemctl enable sddm
 
+# set german keyboard layout for sddm login screen
+localectl set-x11-keymap de
+
 # install audio
 pacman -S pulseaudio pulseaudio-alsa alsa-utils --noconfirm --needed
 
