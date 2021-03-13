@@ -34,8 +34,8 @@ pacman -S plasma-desktop konsole dolphin firefox --noconfirm --needed
 # install latte-dock
 pacman -S latte-dock --noconfirm --needed
 
-# install useful kde managers
-pacman -S plasma-nm bluedevil plasma-pa powerdevil plasma-thunderbolt --noconfirm --needed
+# install useful kde applets
+pacman -S plasma-nm bluedevil plasma-pa powerdevil plasma-thunderbolt kscreen --noconfirm --needed
 
 # install printing sofware
 pacman -S hplip cups print-manager --noconfirm --needed
