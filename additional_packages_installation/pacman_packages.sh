@@ -23,6 +23,7 @@ declare -a programs=(
   "tldr"
   "zsh"
   "autofs"
+  "stress"
 
 
 # development utils
