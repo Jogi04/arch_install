@@ -17,7 +17,6 @@ declare -a programs=(
   "speedtest-cli"
   "nmap"
   "ettercap"
-  "man-db"
   "ethtool"
   "htop"
   "tldr"
