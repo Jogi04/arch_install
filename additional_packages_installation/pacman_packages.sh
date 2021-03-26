@@ -23,6 +23,7 @@ declare -a programs=(
   "zsh"
   "autofs"
   "stress"
+  "ansible"
 
 
 # development utils
