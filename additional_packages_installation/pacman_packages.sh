@@ -39,6 +39,7 @@ declare -a programs=(
   "arduino-avr-core"
   "kdevelop"
   "virtualbox"
+  "openscad"
 
 # desktop utils
   "spectacle"
