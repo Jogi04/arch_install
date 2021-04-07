@@ -25,7 +25,7 @@ declare -a programs=(
   "stress"
   "ansible"
   "nvidia-smi"
-
+  "xf86-video-intel"
 # development utils
   "python"
   "python-pip"
