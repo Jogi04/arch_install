@@ -15,7 +15,7 @@ rm /home/jogi/Music
 rm /home/jogi/Videos
 
 # install graphical utils
-pacman -S xorg-server xorg-xrandr mesa nvidia nvidia-utils nvidia-settings nvidia-lts nvidia-prime sddm sddm-kcm --noconfirm --needed
+pacman -S xorg-server xorg-xrandr xf86-video-intel nvidia nvidia-utils nvidia-settings nvidia-lts nvidia-prime nvidia-smi sddm sddm-kcm --noconfirm --needed
 systemctl enable sddm
 
 # set german keyboard layout for sddm login screen

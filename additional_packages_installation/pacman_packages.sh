@@ -24,8 +24,7 @@ declare -a programs=(
   "autofs"
   "stress"
   "ansible"
-  "nvidia-smi"
-  "xf86-video-intel"
+
 # development utils
   "python"
   "python-pip"
