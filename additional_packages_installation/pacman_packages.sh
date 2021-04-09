@@ -48,6 +48,7 @@ declare -a programs=(
   "keepassxc"
   "vlc"
   "filelight"
+  "grub-customizer"
 
 # system utils
   "tlp"
