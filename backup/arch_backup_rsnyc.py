@@ -1,10 +1,10 @@
-#!/bin/python
+#!/usr/bin/python
 
 import os
-import sys
 import time
 import datetime
 import configparser
+import argparse
 from termcolor import cprint
 from WoL import WoL
 
@@ -20,13 +20,13 @@ class ArchBackupRsync:
         self.server = server
         self.shutdown_bool = shutdown_bool
         if not self.remote_host_up():
-            # wake remote server and wait for 2 minutes while server is booting
+            # wake remote server and wait while server is booting
             WoL()
-            time.sleep(120)
+            time.sleep(150)
         self.start_time = datetime.datetime.now()
         self.backup()
         self.print_runtime()
-        if shutdown_bool == 'true':
+        if shutdown_bool:
             self.shutdown_remote_server()
 
     def backup(self):
@@ -64,29 +64,35 @@ class ArchBackupRsync:
         cprint('Backup took ' + str(runtime), 'green')
 
     def shutdown_remote_server(self):
+        """
+        shuts the server down
+        """
         os.system(f'ssh {self.username}@{self.server} "poweroff"')
 
 
-# load personal information from config file, named config_rsync.ini
-config = configparser.ConfigParser()
-config.read('/home/jogi/programming/python/fun_projects/config_rsync.ini')
-base_cmd = 'rsync -av --delete --stats'
-excl_lst = config['options']['exclude_list'].split(' ')
-incl_lst = config['options']['include_list'].split(' ')
-backup_source = config['paths']['backup_source']
-backup_destination = config['paths']['backup_destination']
-rsync_server = config['paths']['nfs_server']
-ssh_username = config['paths']['username']
-
 if __name__ == '__main__':
-    # if specified via terminal whether server should shutdown after completed backup
-    if len(sys.argv) == 2:
+    # load personal information from config file, named config_rsync.ini
+    config = configparser.ConfigParser()
+    config.read('/home/jogi/programming/python/fun_projects/config_rsync.ini')
+    base_cmd = 'rsync -av --delete --stats'
+    excl_lst = config['options']['exclude_list'].split(' ')
+    incl_lst = config['options']['include_list'].split(' ')
+    backup_source = config['paths']['backup_source']
+    backup_destination = config['paths']['backup_destination']
+    rsync_server = config['paths']['rsync_server']
+    ssh_username = config['paths']['username']
+
+    # shutdown remote server if explicitly specified
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-s', '--shutdown_server', required=False, help='Set true or false depending on whether you'
+                                                                        ' want to shutdown the server or not.'
+                                                                        ' Default value is false.',
+                        default='false')
+    arguments = vars(parser.parse_args())
+
+    if arguments['shutdown_server'].lower() == 'true':
         backup = ArchBackupRsync(base_cmd, incl_lst, excl_lst, backup_source, backup_destination, ssh_username,
-                                 rsync_server, sys.argv[1].lower())
-    # if not specified default to shutdown = true
-    elif len(sys.argv) == 1:
-        backup = ArchBackupRsync(base_cmd, incl_lst, excl_lst, backup_source, backup_destination, ssh_username,
-                                 rsync_server, 'true')
-    # if more than one argument given raise error
+                                 rsync_server, True)
     else:
-        raise NameError('too many arguments given!')
+        backup = ArchBackupRsync(base_cmd, incl_lst, excl_lst, backup_source, backup_destination, ssh_username,
+                                 rsync_server, False)
