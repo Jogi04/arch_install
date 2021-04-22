@@ -1,6 +1,5 @@
 #!/bin/python
 
-import os
 import time
 import configparser
 from selenium import webdriver
@@ -23,8 +22,8 @@ class WoL:
     def init_webdriver(self):
         options = Options()
         options.add_argument('--headless')
-        self.driver = webdriver.Firefox(options=options)
-        addons = [f'{os.getcwd()}/uBlock0_1.32.5b9.firefox.signed.xpi']
+        self.driver = webdriver.Firefox(executable_path='/usr/local/bin/geckodriver', options=options, service_log_path='/dev/null')
+        addons = ['/home/jogi/programming/python/fun_projects/uBlock0_1.32.5b9.firefox.signed.xpi']
         for addon in addons:
             self.driver.install_addon(addon)
 
@@ -36,12 +35,12 @@ class WoL:
     def navigate_to_target_host(self):
         self.driver.find_element_by_id('lan').click()
         self.driver.find_element_by_id('net').click()
-        time.sleep(15)
+        time.sleep(18)
         self.driver.find_element_by_id('edit_landevice258').click()
 
     def wake_host(self):
         time.sleep(20)
         # scroll to the end of the page so the "start host" button is not obscured by "ok"/"cancel" button
         self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        self.driver.find_element_by_xpath('/html/body/main/div[2]/div/div[9]/div/button').click()
+        self.driver.find_element_by_name('btn_wake').click()
         print('remote host started...')
