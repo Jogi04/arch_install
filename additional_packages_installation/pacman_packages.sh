@@ -33,12 +33,12 @@ declare -a programs=(
   "scapy"
   "pycharm-community-edition"
   "wireshark-qt"
-  "gparted"
   "arduino"
   "arduino-avr-core"
   "kdevelop"
   "virtualbox"
   "openscad"
+  "partitionmanager"
 
 # desktop utils
   "spectacle"
