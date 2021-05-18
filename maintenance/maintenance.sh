@@ -11,9 +11,9 @@ sudo pacman -Syu --noconfirm
 # clean cached pacman (delete all uninstalled cached packages and only 2 older versions of installed packages)
 sudo pacman -S pacman-contrib --noconfirm --needed
 sudo paccache -ruk0
-sudo paccache -rk2
+sudo paccache -rk3
 sudo pacman -Rns $(pacman -Qtdq) --noconfirm
 
 # clean chached files and logs
-sudo rm -rf .cache/*
+sudo rm -rf ~/.cache/*
 sudo journalctl --vacuum-time=2weeks
