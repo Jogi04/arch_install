@@ -7,6 +7,7 @@ sudo reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 
 # update system
 sudo pacman -Syu --noconfirm
+flatpak update -y
 
 # clean cached pacman (delete all uninstalled cached packages and only 2 older versions of installed packages)
 sudo pacman -S pacman-contrib --noconfirm --needed
