@@ -15,6 +15,9 @@ sudo paccache -ruk0
 sudo paccache -rk2
 sudo pacman -Rns $(pacman -Qtdq) --noconfirm
 
+# remove unneeded flatpak packages
+sudo flatpak uninstall --unused -y
+
 # clean chached files and logs
 sudo rm -rf ~/.cache/*
 sudo journalctl --vacuum-time=2weeks
