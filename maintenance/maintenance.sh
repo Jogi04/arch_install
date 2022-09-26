@@ -3,7 +3,7 @@
 # update mirrorlist
 sudo cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 sudo pacman -S reflector --noconfirm --needed
-sudo reflector --verbose --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
+sudo reflector --verbose --latest 10 --sort rate --download-timeout 10 --save /etc/pacman.d/mirrorlist
 
 # update system
 sudo pacman -Syu --noconfirm
